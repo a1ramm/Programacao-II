@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Pessoas</title>
+</head>
+<body>
+    <div id = "listagem"></div>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+    <script>
+        var acao = $.ajax({
+            url: 'http://localhost:5000/listar_pessoas',
+            methad: 'get',
+            datatype: 'json'
+        });
+
+        acao.done(function(resultado){
+            for(var pessoa of resultado) {
+                var lin = '=>' + pessoa.nome +
+                ',' + pessoa.nascimento +
+                ',' + pessoa.email +
+                ',' + pessoa.telefone;
+                $('#listagem').append(lin)
+            }
+        });
+
+        acao.fail(function(){
+            alert('erro')
+        });
+
+    </script>
+</body> 
+</html>
